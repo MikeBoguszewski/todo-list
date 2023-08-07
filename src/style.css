@@ -1,0 +1,180 @@
+:root {
+    --blue: #0284c7;
+    --white: #f0f9ff;
+    --light-blue: #7dd3fc;
+    --dark-blue: #082f49;
+}
+
+body {
+    margin: 0px;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows: 100px;
+}
+.header {
+    background-color: var(--blue);
+    color: var(--white);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    grid-column: span 2;
+}
+
+.header img {
+    width: 90px;
+    height: auto;
+}
+
+.sidebar {
+    background-color: var(--light-blue);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+    color: var(--dark-blue);
+}
+
+.project {
+    color: var(--dark-blue);
+    padding: 0;
+    background: none;
+    border: none;
+    width: 100%;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: start;
+}
+
+.sidebar h3 {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    font-size: 30px;
+}
+
+.projects button {
+    color: var(--dark-blue);
+}
+
+.project-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.project-view {
+    padding: 30px;
+    background-color: var(--white);
+}
+
+.project-view h2 {
+    margin: 0px;
+    margin-block-end: 0px;
+    margin-block-start: 0px;
+    color: var(--dark-blue);
+    font-size: 40px;
+}
+
+.todo-button {
+    padding: 0;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--dark-blue);
+}
+
+.circle-image {
+    width: 25px;
+    height: auto;
+}
+
+.todo-item {
+    display: flex;
+    text-align: center;
+    gap: 5px;
+    padding-bottom: 10px;
+}
+
+.add-task {
+    padding: 0px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    color: var(--dark-blue);
+    height: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.add-project {
+    padding: 0px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    color: var(--dark-blue);
+    height: 30px;
+}
+
+.add-task p {
+    margin-block-end: 0px;
+    margin-block-start: 0px;
+}
+
+.add {
+    width: 30px;
+    height: auto;
+}
+
+.task-input {
+    padding: 5px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border: solid var(--dark-blue);
+    border-radius: 5px;
+    height: 30px;
+}
+
+
+.project-input {
+    padding: 5px;
+    box-sizing: border-box;
+    background: none;
+    border: none;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border: solid var(--dark-blue);
+    border-radius: 5px;
+    height: 30px;
+}
+
+.date-button {
+    margin-left: auto;
+}
+
+.project-button-container {
+    display: flex;
+    align-items: center;
+    justify-items: start;
+}
+
+.delete-button {
+    margin-left: auto;
+    height: 25px;
+    width: auto;
+}
