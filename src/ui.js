@@ -1,4 +1,4 @@
-import {getTodoList, addItemTodoList, removeItemTodoList, todoItem, getProjects, addProject, removeProject} from './todo-list'
+import {getTodoList, addItemTodoList, removeItemTodoList, todoItem, getProjects, addProject, removeProject, setProject, updateTitle} from './todo-list'
 
 const inbox = document.querySelector('.inbox');
 const projectView = document.querySelector('.project-view');
@@ -15,8 +15,12 @@ function loadProjectHeader(event) {
     projectViewHeader.innerText = event.target.innerText;
 }
 
-projectButtons.forEach(project => {
-    project.addEventListener('click', loadProjectHeader);
+projectButtons.forEach((project, index) => {
+    project.addEventListener('click', (event) => {
+        loadProjectHeader(event);
+        setProject(index);
+        loadTasks();
+    });
 });
 
 function loadTaskForm() {
@@ -83,32 +87,62 @@ function loadTasks() {
         });
         dateInput.addEventListener('change', () => {
             todoItem.dueDate = dateInput.value;
-        })
+        });
+        taskButton.addEventListener('click', () => {
+            editTodoTitle(task, taskButton, todoItem);
+        });
+
+    
     });
 }
 
 function loadProjects() {
     projectContainer.innerText = ''
     const projects = getProjects();
-    projects.forEach(project => {
+    projects.forEach((project, index) => {
+        if (index === 0) {
+            return;
+        }
         const projectButtonContainer = document.createElement('div');
         projectButtonContainer.classList.add('project-button-container')
         const projectButton = document.createElement('button');
         projectButton.classList.add('project')
         projectButton.innerText = project;
-        projectButton.addEventListener('click', loadProjectHeader);
+        projectButton.addEventListener('click', (event) => {
+            loadProjectHeader(event);
+            setProject(index);
+            loadTasks();
+        });
         const deleteButton = document.createElement('img');
         deleteButton.classList.add('delete-button');
         deleteButton.src = './close.svg';
-        deleteButton.addEventListener('click', () => {
+        deleteButton.addEventListener('click', (event) => {
             removeProject(project);
             loadProjects();
             loadTasks();
+            projectViewHeader.innerText = inbox.innerText;
         });
 
         projectButtonContainer.appendChild(projectButton);
         projectButtonContainer.appendChild(deleteButton);
         projectContainer.appendChild(projectButtonContainer);
+    });
+}
+
+function editTodoTitle(task, taskButton, todoItem) {
+    const todoList = getTodoList();
+    const titleForm = document.createElement('form');
+    const titleInput = document.createElement('input');
+    titleInput.classList.add('title-input');
+    titleForm.appendChild(titleInput);
+    task.replaceChild(titleForm, taskButton);
+    titleForm.addEventListener('submit', (event) => {
+        console.log('title')
+        event.preventDefault();
+        updateTitle(titleInput.value, todoList.indexOf(todoItem));
+        loadTasks();
+        titleForm.reset();
+        projectView.replaceChild(taskButton, titleForm);
     });
 }
 

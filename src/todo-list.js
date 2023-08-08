@@ -1,25 +1,28 @@
-let todoList = [];
+let inbox = [];
 let projects = [];
 let todoLists = [];
+let currentProject;
+currentProject = inbox;
+projects.push('Inbox');
+todoLists.push(inbox);
 
 export function todoItem (title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
-    this.priority = priority;
 }
 
 export function addItemTodoList(item) {
-    todoList.push(item);
+    currentProject.push(item);
 }
 
 export function removeItemTodoList(item) {
-    const index = todoList.indexOf(item);
-    todoList.splice(index, 1)
+    const index = inbox.indexOf(item);
+    currentProject.splice(index, 1)
 }
 
 export function getTodoList() {
-    return todoList;
+    return currentProject;
 }
 
 export function addProject(project) {
@@ -34,13 +37,24 @@ export function removeProject(project) {
     const index = projects.indexOf(project);
     projects.splice(index, 1);
     todoLists.splice(index, 1);
+    currentProject = inbox;
 }
 
 export function getProjects() {
     return projects
 }
 
+export function setProject(project) {
+    const currentIndex = project;
+    currentProject = todoLists[currentIndex];
+    console.log(currentProject);
+}
+
+export function updateTitle(title, index) {
+    currentProject[index].title = title;
+}
+
 let todoItem0 = new todoItem('Wash Dishes');
 let todoItem1 = new todoItem('Do Laundry');
-todoList.push(todoItem0)
-todoList.push(todoItem1)
+inbox.push(todoItem0)
+inbox.push(todoItem1)

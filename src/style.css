@@ -178,3 +178,8 @@ body {
     height: 25px;
     width: auto;
 }
+
+.edit-modal {
+    width: 600px;
+    height: auto;
+}
