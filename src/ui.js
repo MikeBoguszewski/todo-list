@@ -1,4 +1,4 @@
-import {getTodoList, addItemTodoList, removeItemTodoList, todoItem, getProjects, addProject, removeProject, setProject, updateTitle} from './todo-list'
+import {getTodoList, addItemTodoList, removeItemTodoList, todoItem, getProjects, addProject, removeProject, setProject, updateTitle, updateDate, accessStorage} from './todo-list'
 
 const inbox = document.querySelector('.inbox');
 const projectView = document.querySelector('.project-view');
@@ -60,7 +60,7 @@ addProjectButton.addEventListener('click', loadProjectForm);
 function loadTasks() {
     todoContainer.innerText = '';
     const todoList = getTodoList();
-    todoList.forEach(todoItem => {
+    todoList.forEach((todoItem, index) => {
         const task = document.createElement('div');
         task.classList.add('todo-item');
         const taskButton = document.createElement('button');
@@ -80,19 +80,15 @@ function loadTasks() {
         todoContainer.appendChild(task);
 
         circleImage.addEventListener('click', () => {
-            console.log('remove')
-            console.log(getTodoList());
             removeItemTodoList(todoItem);
             loadTasks();
         });
         dateInput.addEventListener('change', () => {
-            todoItem.dueDate = dateInput.value;
+            updateDate(dateInput.value, index);
         });
         taskButton.addEventListener('click', () => {
             editTodoTitle(task, taskButton, todoItem);
         });
-
-    
     });
 }
 
@@ -137,13 +133,14 @@ function editTodoTitle(task, taskButton, todoItem) {
     titleForm.appendChild(titleInput);
     task.replaceChild(titleForm, taskButton);
     titleForm.addEventListener('submit', (event) => {
-        console.log('title')
-        event.preventDefault();
         updateTitle(titleInput.value, todoList.indexOf(todoItem));
-        loadTasks();
+        event.preventDefault();
         titleForm.reset();
-        projectView.replaceChild(taskButton, titleForm);
+        loadTasks();
+        task.replaceChild(taskButton, titleForm);
+        
     });
 }
 
 loadTasks();
+loadProjects();
